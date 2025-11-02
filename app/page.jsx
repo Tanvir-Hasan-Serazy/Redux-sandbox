@@ -8,13 +8,21 @@ export default function Home() {
         sharpent my redux skills.
       </h1>
       <div className="px-4 pt-10">
-        <ul>
-          <li className="list-disc">
+        <ul className="space-y-3 list-disc">
+          <li>
             <Link
               href="/counter"
               className="font-bold text-lg xl:text-3xl underline"
             >
               Counter App
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/todo"
+              className="font-bold text-lg xl:text-3xl underline"
+            >
+              To-Do
             </Link>
           </li>
         </ul>
