@@ -4,8 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo, deleteTodo, toggleTodo } from "@/lib/redux/slice/todoSlice";
 
 const TodoPage = () => {
+  const dispatch = useDispatch();
+  const todoData = useSelector((state) => state.todo);
+
   const {
     register,
     handleSubmit,
@@ -13,7 +18,7 @@ const TodoPage = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(addTodo(data));
     reset();
   };
   return (
@@ -48,8 +53,10 @@ const TodoPage = () => {
       </form>
 
       {/* Todo Cards */}
-      <div className="pt-12 xl:pt-24">
-        <TodoCard />
+      <div className="pt-12 xl:pt-24 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-4">
+        {todoData.map((data) => (
+          <TodoCard data={data} />
+        ))}
       </div>
     </div>
   );

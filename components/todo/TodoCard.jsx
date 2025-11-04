@@ -1,30 +1,39 @@
-import React from "react";
 import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-const TodoCard = () => {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { format } from "date-fns";
+import { Button } from "../ui/button";
+import { useDispatch } from "react-redux";
+import { deleteTodo } from "@/lib/redux/slice/todoSlice";
+
+const TodoCard = ({ data }) => {
+  const datetime = format(data.id, "PPp");
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteTodo(data.id));
+  };
   return (
-    <div>
-      <HoverCard>
-        <HoverCardTrigger asChild>
-          <Button variant="link">@nextjs</Button>
-        </HoverCardTrigger>
-        <HoverCardContent className="w-80">
-          <div className="flex justify-between gap-4">
-            <div className="space-y-1">
-              <h4 className="text-sm font-semibold">@nextjs</h4>
-              <p className="text-sm">
-                The React Framework – created and maintained by @vercel.
-              </p>
-              <div className="text-muted-foreground text-xs">
-                Joined December 2021
-              </div>
-            </div>
-          </div>
-        </HoverCardContent>
-      </HoverCard>
+    <div className="max-w-md">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg xl:text-xl">{data?.title} </CardTitle>
+          <CardDescription>{datetime}</CardDescription>
+          <CardAction>
+            <Button variant="destructive" onClick={handleDelete}>
+              Delete
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <p>{data?.note}</p>
+        </CardContent>
+      </Card>
     </div>
   );
 };
