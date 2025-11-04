@@ -1,4 +1,5 @@
 "use client";
+import TodoCard from "@/components/todo/TodoCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,6 +46,11 @@ const TodoPage = () => {
           Add
         </Button>
       </form>
+
+      {/* Todo Cards */}
+      <div className="pt-12 xl:pt-24">
+        <TodoCard />
+      </div>
     </div>
   );
 };
