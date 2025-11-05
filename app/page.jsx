@@ -25,6 +25,14 @@ export default function Home() {
               To-Do
             </Link>
           </li>
+          <li>
+            <Link
+              href="/book-store"
+              className="font-bold text-lg xl:text-3xl underline"
+            >
+              Book Store
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
