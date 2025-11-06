@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/select";
 
 import { useForm, Controller } from "react-hook-form";
+import { addBook } from "@/lib/redux/slice/bookSlice";
+import { useDispatch } from "react-redux";
 
 const CreateBook = () => {
   const {
@@ -28,8 +30,10 @@ const CreateBook = () => {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
+
   const handleFormSubmit = (data) => {
-    console.log(data);
+    dispatch(addBook(data));
     reset();
   };
 
@@ -63,15 +67,30 @@ const CreateBook = () => {
                 )}
               </div>
               <div className="grid grid-cols-3 items-center gap-4">
-                <Label htmlFor="Author">Author</Label>
+                <Label htmlFor="author">Author</Label>
                 <Input
-                  id="Author"
+                  id="author"
                   className="col-span-2 h-8"
                   {...register("author", { required: "Author is required" })}
                 />
                 {errors.author && (
                   <p className="text-red-500 text-sm text-nowrap">
                     {errors.author.message}
+                  </p>
+                )}
+              </div>
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="Description">Description</Label>
+                <Input
+                  id="description"
+                  className="col-span-2 h-8"
+                  {...register("description", {
+                    required: "Description is required",
+                  })}
+                />
+                {errors.description && (
+                  <p className="text-red-500 text-sm text-nowrap">
+                    {errors.description.message}
                   </p>
                 )}
               </div>
@@ -95,7 +114,7 @@ const CreateBook = () => {
                 <Input
                   id="cover-Image"
                   className="col-span-2 h-8"
-                  {...register("ImageURL", {
+                  {...register("imageURL", {
                     required: "Image URL is required",
                   })}
                 />
@@ -137,7 +156,7 @@ const CreateBook = () => {
               )}
             </div>
             <Controller
-              name="bestSeller"
+              name="isBestSeller"
               control={control}
               rules={{ required: "Is it best-seller? " }}
               render={({ field, fieldState }) => (
